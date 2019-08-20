@@ -41,7 +41,7 @@ class Settings():
         self.laserSoundsName = "Laser_Gun_short.wav"
         self.laserSoundsPath = "%s/sounds/%s" %(self.dir_path, self.laserSoundsName)
 
-        self.endGameMusic = "someMusic.wave"
+        self.endGameMusic = "endMusic.wav"
 
         self.resest_dynamic_settings()
 

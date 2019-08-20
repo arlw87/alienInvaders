@@ -260,12 +260,6 @@ def check_keyup_event(rocket, event):
 
 def fire_bullet(bullets, settings, window, rocket, sounds):
     if len(bullets) < settings.bullets_allowed:
-        #sound effect
-        #pygame.mixer.init()
-        #effect = pygame.mixer.Sound(settings.laserSoundsPath)
-        #effect.play()
-        #pygame.mixer.music.load(settings.laserSoundsPath)
-        #pygame.mixer.music.play()
         sounds.playSoundEffort()
         new_bullet = Bullet(settings, window, rocket)
         bullets.add(new_bullet)
