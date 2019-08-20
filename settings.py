@@ -23,7 +23,7 @@ class Settings():
         self.fleet_direction = 1
 
         #GameStat settings
-        self.ship_limit = 3
+        self.ship_limit = 1
 
         #button Settings
         self.green_button = (0, 250, 0)
@@ -41,7 +41,7 @@ class Settings():
         self.laserSoundsName = "Laser_Gun_short.wav"
         self.laserSoundsPath = "%s/sounds/%s" %(self.dir_path, self.laserSoundsName)
 
-        self.endGameMusic = "endMusic.wav"
+        self.endGameMusic = "%s/sounds/%s"%(self.dir_path,"endMusic.wav")
 
         self.resest_dynamic_settings()
 

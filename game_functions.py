@@ -5,19 +5,19 @@ from aliens import Alien
 import time
 
 
-def update_aliens(aliens, settings, rocket, bullets, screen, stats, scoreboard):
+def update_aliens(aliens, settings, rocket, bullets, screen, stats, scoreboard, sounds):
     #if any alien in the fleet is at the edges then update the Direction
     check_fleet(aliens, settings)
     #check for collisions with the rocket
-    check_end_of_game(aliens, bullets, screen, rocket, settings, stats, scoreboard)
+    check_end_of_game(aliens, bullets, screen, rocket, settings, stats, scoreboard, sounds)
     aliens.update()
 
-def check_end_of_game(aliens, bullets, screen, rocket, settings, stats, scoreboard):
+def check_end_of_game(aliens, bullets, screen, rocket, settings, stats, scoreboard, sounds):
     if check_rocket_alien_collison(aliens, rocket) or check_alien_position(aliens, settings):
-        ship_hit(aliens, bullets, screen, rocket, stats, settings, scoreboard)
+        ship_hit(aliens, bullets, screen, rocket, stats, settings, scoreboard, sounds)
 
 
-def ship_hit(aliens, bullets, screen, rocket, stats, settings, scoreboard):
+def ship_hit(aliens, bullets, screen, rocket, stats, settings, scoreboard, sounds):
     #reser the game
     aliens.empty()
     bullets.empty()
@@ -27,7 +27,7 @@ def ship_hit(aliens, bullets, screen, rocket, stats, settings, scoreboard):
     time.sleep(1)
     if stats.ships_left == 0:
         check_high_score(stats, scoreboard)
-        game_over(stats, settings, scoreboard)
+        game_over(stats, settings, scoreboard, sounds)
     else:
         #draw new fleet
         create_fleet(aliens, settings, screen, rocket)
@@ -39,10 +39,11 @@ def check_high_score(stats, scoreboard):
         scoreboard.prep_high_score()
     #print("High Score: ", stats.high_score)
 
-def game_over(stats, settings, scoreboard):
+def game_over(stats, settings, scoreboard, sounds):
     print("End of game")
     stats.game_active = False
     stats.game_over = True
+    sounds.playEndMusic()
     #reset the ship limits
     #stats.reset_stats()
     #reset socrevoard levelpygame.mixer.music.load('foo.mp3')
@@ -172,14 +173,16 @@ def check_events(rocket, window, bullets, settings, button, stats, scoreboard, a
 
         elif event.type == pygame.MOUSEBUTTONDOWN:
             x_mouse_pos, y_mouse_pos = pygame.mouse.get_pos()
-            check_button_press(stats, button, x_mouse_pos, y_mouse_pos, scoreboard, aliens, bullets, settings, screen, rocket)
+            check_button_press(stats, button, x_mouse_pos, y_mouse_pos, scoreboard, aliens, bullets, settings, screen, rocket, sounds)
 
-def check_button_press(stats, button, x, y, scoreboard, aliens, bullets, settings, screen, rocket):
+def check_button_press(stats, button, x, y, scoreboard, aliens, bullets, settings, screen, rocket, sounds):
     if x > button.rect.left and x < button.rect.right:
         if y > button.rect.top and y < button.rect.bottom:
             stats.game_active = True
             #make mouse pointer invisible
             pygame.mouse.set_visible(False)
+            #start music for the game
+            sounds.playBgMusic()
             setup_new_game(stats, scoreboard, aliens, bullets, settings, screen, rocket)
 
 def setup_new_game(stats, scoreboard, aliens, bullets, settings, screen, rocket):

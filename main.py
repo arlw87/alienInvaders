@@ -33,7 +33,7 @@ def run_game():
 
     #Create sounds object
     sounds = gameSounds(gs.musicPath, gs.endGameMusic, gs.laserSoundsPath)
-    sounds.playBgMusic()
+    #sounds.playBgMusic()
 
     #Create the Rocket
     rocket = Rocket(screen, gs)
@@ -72,7 +72,7 @@ def run_game():
             funcs.update_bullets(bullets, aliens, screen, rocket, gs, stats, SB)
 
             #print(len(bullets))
-            funcs.update_aliens(aliens, gs, rocket, bullets, screen, stats, SB)
+            funcs.update_aliens(aliens, gs, rocket, bullets, screen, stats, SB, sounds)
 
         funcs.update_screen(screen, rocket, gs, bullets, aliens, play_button, stats, game_over, SB)
 
