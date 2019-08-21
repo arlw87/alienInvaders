@@ -62,8 +62,13 @@ def run_game():
     #Create a Scoreboard
     SB = Scoreboard(gs, screen, stats)
 
+    #control the frame rate of the game
+    clock = pygame.time.Clock()
+    FRAMERATE = 150
+
     #start the main loop of the program
     while True:
+        #clock.tick(FRAMERATE)
         funcs.check_events(rocket, screen, bullets, gs, play_button, stats, SB, aliens, screen, sounds)
         if stats.game_active == True:
             rocket.update_position()
